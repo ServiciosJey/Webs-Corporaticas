@@ -45,51 +45,115 @@
   .logo img{width:75px;height:100%;object-fit:contain;padding:4px}
   /* menú a la derecha con icono */
   .menu-toggle{
-    display:inline-flex; align-items:center; gap:8px;
+    display:inline-flex; align-items:center; justify-content:center;
+    width:48px; height:48px;
     background:#0e0e0e; border:1px solid var(--line); color:#fff;
-    padding:10px 12px; border-radius:12px; font-weight:800; cursor:pointer;
+    border-radius:14px; cursor:pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,.35);
   }
-  .menu-toggle svg{width:20px;height:20px}
+  .menu-toggle svg{width:22px;height:22px}
 
-  /* ===== Drawer derecho ===== */
+  /* ===== Drawer derecho (pro) ===== */
   .scrim{
     position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(2px);
     opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:9998;
   }
   .drawer{
-    position:fixed; right:0; top:0; bottom:0; width:min(86vw,380px);
-    background:#0f0f0f; border-left:1px solid var(--line); box-shadow: -16px 0 40px rgba(0,0,0,.4);
+    position:fixed; right:0; top:0; bottom:0; width:min(88vw,380px);
+    background: radial-gradient(120% 120% at 100% 0%, #141414 0%, #0f0f0f 60%);
+    border-left:1px solid var(--line);
     transform:translateX(100%); transition:transform .3s ease; z-index:9999; display:flex; flex-direction:column;
-  }
-  .drawer header{position:sticky; top:0; background:#0f0f0f; border-bottom:1px solid var(--line)}
-  .drawer .content{padding:16px; display:grid; gap:12px}
-  .drawer nav a{display:block; padding:12px 10px; border:1px solid var(--line); border-radius:12px; margin-bottom:8px}
-  .drawer .close{
-    position:absolute; left:12px; top:12px; background:#0e0e0e; border:1px solid var(--line);
-    color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:6px
   }
   .drawer-open .drawer{transform:none}
   .drawer-open .scrim{opacity:1; pointer-events:auto}
 
-  /* ===== Hero (imagen completa sin blur de fondo) ===== */
+  .drawer .hdr{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 16px; border-bottom:1px solid var(--line);
+  }
+  .drawer .brand-mini{display:flex; align-items:center; gap:10px}
+  .drawer .brand-mini .logo{width:54px;height:34px}
+  .drawer .close{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:40px; height:40px; border-radius:12px; background:#0e0e0e; border:1px solid var(--line); cursor:pointer;
+  }
+  .drawer .content{padding:16px 16px 10px 16px; display:grid; gap:16px; overflow:auto}
+  .drawer .group-title{font-size:12px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase}
+  .drawer nav{display:grid; gap:8px}
+  .drawer nav a{
+    display:flex; align-items:center; gap:10px; padding:12px 12px; border:1px solid var(--line);
+    border-radius:12px; background:#0e0e0e;
+  }
+  .drawer nav a svg{width:18px;height:18px;flex:0 0 auto}
+  .drawer .sep{height:1px; background:var(--line); margin:2px 0 6px}
+  .drawer .foot{margin-top:auto; padding-top:6px; display:grid; gap:10px}
+  .drawer .social{display:flex; gap:10px}
+  .drawer .social a{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line); padding:8px 10px; border-radius:10px}
+
+  /* ===== Hero ===== */
   .hero{
     position:relative; overflow:hidden; padding:96px 0 48px;
     min-height: 80vh; display:flex; align-items:flex-end; isolation:isolate;
     background: url("https://i.postimg.cc/bv1Zv6TQ/Chat-GPT-Image-10-ago-2025-10-59-07-p-m.png") center/cover no-repeat;
   }
-  /* contenedor interior */
+  /* En móvil se usa tu otra imagen */
+  @media (max-width:640px){
+    .hero{
+      background: url("https://i.postimg.cc/cHdpPmLx/Imagen1.png") center/cover no-repeat;
+      min-height: 78vh;
+      padding: 88px 0 40px;
+    }
+  }
+
   .hero-inner{width:min(1100px,92%); margin:0 auto; position:relative; z-index:2}
 
   /* ===== Panel de contenido con “nube” animada ===== */
   .cloud{
-    position:relative; padding: clamp(14px, 3.5vw, 24px); color:#fff;
-    /* Sin bordes marcados: usar máscara de desvanecido suave */
+    position:relative; padding: clamp(16px, 3.8vw, 28px); color:#fff;
     -webkit-mask-image: radial-gradient(140% 100% at 50% 50%, #000 70%, transparent 100%);
             mask-image: radial-gradient(140% 100% at 50% 50%, #000 70%, transparent 100%);
     border-radius:24px; overflow:hidden;
   }
- 
-  .hero h1{font-size: clamp(28px, 5.6vw, 54px); margin:0 0 10px; line-height:1.06}
+  .cloud::before,
+  .cloud::after{
+    content:""; position:absolute; inset:-30%;
+    background:
+      radial-gradient(40% 35% at 20% 30%, rgba(255,255,255,.08), transparent 60%),
+      radial-gradient(35% 30% at 70% 60%, rgba(255,255,255,.07), transparent 65%),
+      radial-gradient(28% 24% at 40% 80%, rgba(255,255,255,.06), transparent 70%),
+      radial-gradient(30% 28% at 80% 20%, rgba(255,255,255,.05), transparent 70%);
+    filter: blur(16px);
+    mix-blend-mode: screen;
+    animation: cloudMove 36s linear infinite;
+    pointer-events:none; z-index:-1;
+  }
+  .cloud::after{animation-duration:54s; animation-direction:reverse}
+  @keyframes cloudMove{
+    0%{transform: translate3d(-4%, -2%, 0) scale(1)}
+    50%{transform: translate3d(4%, 3%, 0) scale(1.03)}
+    100%{transform: translate3d(-4%, -2%, 0) scale(1)}
+  }
+
+  /* Título gigante + onda por letra */
+  .hero h1{
+    margin:0 0 10px; line-height:1.02;
+    font-size: clamp(40px, 9vw, 72px);
+    font-weight: 900;
+    letter-spacing: .5px;
+  }
+  .wave span{
+    display:inline-block;
+    animation: waveFloat 2.6s ease-in-out infinite;
+    transform-origin: 50% 80%;
+  }
+  .wave span:nth-child(odd){ animation-delay: .12s }
+  .wave span:nth-child(3n){ animation-delay: .24s }
+  .wave span:nth-child(4n){ animation-delay: .36s }
+  @keyframes waveFloat{
+    0%,100%{ transform: translateY(0) rotate(0deg) }
+    50%{ transform: translateY(-6px) rotate(-0.6deg) }
+  }
+
   .sub{color:var(--muted); font-size: clamp(14px, 2.2vw, 18px); margin:0 0 16px}
   .badges{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px}
   .badge{border:1px solid var(--line); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; background:rgba(0,0,0,.35); backdrop-filter: blur(3px)}
@@ -102,19 +166,29 @@
   .btn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 45%, transparent 55%); transform:translateX(-120%); transition:transform .6s ease}
   .btn:hover::after{transform:translateX(120%)}
 
-   /* fondo crital */
+  /* chips “cristal” */
   .cristal {
-  background: rgba(255, 255, 255, 0.1); /* Transparente blanco */
-  border-radius: 12px; /* Bordes redondeados */
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
-  backdrop-filter: blur(8px); /* Efecto desenfoque */
-  -webkit-backdrop-filter: blur(8px); /* Soporte en Safari */
-  color: white; /* Texto blanco */
-  font-weight: 500;
-  display: inline-block; /* Para que solo ocupe lo necesario */
-}
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff; font-weight:600; display:inline-block;
+  }
 
+  /* FAB móvil: Hablar con un asesor */
+  .fab{
+    position:fixed; right:16px; bottom:16px; z-index:9997;
+    display:none; /* solo móvil */
+    align-items:center; gap:8px;
+    padding:10px 14px; border-radius:999px;
+    background:#0e0e0e; color:#fff; font-weight:800;
+    border:1px solid rgba(37,211,102,.6);
+    box-shadow: 0 12px 30px rgba(0,0,0,.45);
+  }
+  .fab svg{width:18px;height:18px}
+  @media (max-width:768px){ .fab{display:inline-flex} }
 
   /* ===== Secciones comunes ===== */
   section{padding:68px 0; border-top:1px solid var(--line); position:relative; background:transparent}
@@ -187,8 +261,8 @@
     .reveal, .reveal.in{animation:none!important; transform:none!important}
     .shine{animation:none!important}
     .cloud::before, .cloud::after{animation:none!important}
+    .wave span{animation:none!important}
   }
-
 </style>
 
 <!-- Schema.org -->
@@ -211,7 +285,7 @@
         <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
       </div>
     </a>
-    <!-- SOLO icono de menú a la derecha -->
+    <!-- Icono de menú a la derecha -->
     <button class="menu-toggle" id="openDrawer" aria-label="Abrir menú">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/></svg>
     </button>
@@ -221,21 +295,43 @@
 <!-- Drawer derecho -->
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-hidden="true">
-  <header class="nav" style="padding:12px 16px">
+  <div class="hdr">
+    <div class="brand-mini">
+      <div class="logo" aria-hidden="true" style="width:60px;height:36px">
+        <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
+      </div>
+      <strong>Servicios Jey</strong>
+    </div>
     <button class="close" id="closeDrawer" aria-label="Cerrar menú">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M18.3 5.71 12 12.01l-6.29-6.3-1.41 1.42L10.59 13.4l-6.3 6.3 1.42 1.41 6.3-6.29 6.29 6.29 1.41-1.41-6.29-6.3 6.3-6.29-1.41-1.41Z"/></svg>
-      Cerrar
     </button>
-  </header>
+  </div>
   <div class="content">
-    <nav>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#plan">Plan</a>
-      <a href="#pasos">Cómo funciona</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <a class="btn" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener">Prueba gratis 7 días</a>
+    <div>
+      <div class="group-title">Navegación</div>
+      <div class="sep"></div>
+      <nav>
+        <a href="#beneficios"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M12 2 2 7l10 5 10-5-10-5Zm0 7L2 4v13h20V4l-10 5Z"/></svg>Beneficios</a>
+        <a href="#plan"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 4h18v2H3zM3 11h18v2H3zM3 18h18v2H3z"/></svg>Plan y precio</a>
+        <a href="#pasos"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"/></svg>Cómo funciona</a>
+        <a href="#faq"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm2.07-7.75-.9.92A2.51 2.51 0 0 0 13 12h-2a4.5 4.5 0 0 1 1.32-3.19l1.24-1.26a1.5 1.5 0 1 0-2.56-1.06H9a3.5 3.5 0 1 1 6.07 2.76Z"/></svg>FAQ</a>
+        <a href="#contacto"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v12H5.17L4 17.17V4Zm2 2v8h12V6H6Zm-2 14h16v2H4v-2Z"/></svg>Contacto</a>
+      </nav>
+    </div>
+
+    <div class="foot">
+      <a class="btn" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener">Prueba gratis 7 días</a>
+      <div class="social">
+        <a href="https://www.instagram.com/servicios_jey/" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 5 5 5 5 0 0 0-5-5Zm6-1a1 1 0 1 0 1 1 1 1 0 0 0-1-1Z"/></svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/18094862675" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M20 3H4a1 1 0 0 0-1 1v16l4-4h13a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
   </div>
 </aside>
 
@@ -244,7 +340,7 @@
   <section class="hero">
     <div class="hero-inner">
       <div class="cloud">
-        <h1 class="shine">Tu Web Corporativa lista en 2–3 días</h1>
+        <h1 id="waveTitle">Tu Web Corporativa lista en 2–3 días</h1>
         <p class="sub">Diseño personalizado + dominio + hosting + WhatsApp integrado.
           <b>RD$800/mes</b> + <b>RD$1,000 inicial</b>. <u>1 semana de prueba gratis</u>.
         </p>
@@ -259,7 +355,7 @@
         <div class="hero-actions">
           <a class="btn primary" data-cta>Quiero mi semana gratis</a>
           <a class="btn whatsapp" data-cta>Hablar por WhatsApp</a>
-          <a class="btn" href="#plan">Ver plan y precio</a>
+          <a class="cristal" href="#plan">Ver plan y precio</a>
         </div>
       </div>
     </div>
@@ -441,6 +537,12 @@
   <div class="container" style="margin-top:16px">© <span id="year"></span> Servicios Jey — Todos los derechos reservados.</div>
 </footer>
 
+<!-- FAB móvil -->
+<a class="fab" id="fabAdvisor" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20necesito%20hablar%20con%20un%20asesor%20sobre%20la%20Web%20Corporativa." target="_blank" rel="noopener" aria-label="Hablar con un asesor">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M4 4h16v12H5.17L4 17.17V4Zm2 2v8h12V6H6Zm-2 14h16v2H4v-2Z"/></svg>
+  Hablar con un asesor
+</a>
+
 <script>
   // Año dinámico
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -463,10 +565,7 @@
   openBtn?.addEventListener('click', openDrawer);
   closeBtn?.addEventListener('click', closeDrawer);
   scrim?.addEventListener('click', closeDrawer);
-  // Cerrar al navegar
-  drawer.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', closeDrawer);
-  });
+  drawer.querySelectorAll('a[href^="#"]').forEach(a=> a.addEventListener('click', closeDrawer));
 
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -528,6 +627,25 @@
   }
   document.addEventListener('DOMContentLoaded', loadForm);
   ['input','change'].forEach(evt => form?.addEventListener(evt, saveForm));
+
+  // ===== Título con onda: envolver letras en spans =====
+  (function(){
+    const h1 = document.getElementById('waveTitle');
+    if(!h1) return;
+    const text = h1.textContent.trim();
+    h1.textContent = '';
+    const frag = document.createDocumentFragment();
+    for(let i=0;i<text.length;i++){
+      const ch = text[i];
+      const span = document.createElement('span');
+      span.textContent = ch;
+      frag.appendChild(span);
+      // retrasos escalonados
+      span.style.animationDelay = (i * 0.06) + 's';
+    }
+    h1.classList.add('wave');
+    h1.appendChild(frag);
+  })();
 </script>
 </body>
 </html>
