@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Servicios Jey — Web Corporativa por RD$800/mes + RD$1,000 inicial</title>
+<meta name="description" content="Consigue tu página web corporativa profesional con dominio, hosting y mantenimiento incluido. 1 semana de prueba gratis. RD$800/mes + RD$1,000 inicial. Propiedad tras 4 meses. Pago cada 25 de mes." />
+<meta name="theme-color" content="#000000" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Web Corporativa — RD$800/mes + RD$1,000 inicial" />
+<meta property="og:description" content="Diseño personalizado, dominio, hosting y WhatsApp integrado. 1 semana gratis. Propiedad tras 4 meses." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://servicios-jey.example/web-corporativa" />
+<meta property="og:image" content="https://i.postimg.cc/bv1Zv6TQ/Chat-GPT-Image-10-ago-2025-10-59-07-p-m.png" />
+
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --paper:#121212;
+    --ink:#f2f2f2;
+    --muted:#bfbfbf;
+    --line:#262626;
+    --brand:#bfbfbf; /* gris de marca */
+    --ok:#25D366;
+    --radius:16px;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial}
+  a{color:var(--ink);text-decoration:none}
+  img{max-width:100%;display:block}
+  .container{width:min(1100px, 92%);margin:0 auto}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky; top:0; z-index:1000;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,.5);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:12px 0}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
+  .logo{width:85px; height:50px; border-radius:5px; background:#fff; display:grid; place-items:center; border:1px solid var(--line)}
+  .logo img{width:75px;height:100%;object-fit:contain;padding:4px}
+  nav ul{display:flex; gap:18px; list-style:none; padding:0;margin:0;font-weight:600}
+  .cta{display:inline-flex; align-items:center; gap:10px; font-weight:800; background:#000; border:1px solid var(--brand); color:#fff; padding:10px 16px; border-radius:12px}
+  .menu-btn{display:none}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative; overflow:hidden; padding:72px 0 24px;
+    background:
+      radial-gradient(800px 400px at 85% -10%, #1a1a1a 0%, transparent 60%),
+      radial-gradient(600px 300px at 10% 10%, #151515 0%, transparent 60%);
+    isolation:isolate;
+  }
+  /* spotlight/iluminación */
+  .hero::after{
+    content:""; position:absolute; inset:-40%;
+    background:
+      radial-gradient(60% 60% at 65% 35%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(35% 35% at 25% 75%, rgba(255,255,255,.05), transparent 70%);
+    filter: blur(18px);
+    z-index:-1; pointer-events:none;
+    animation: lightSweep 9s ease-in-out infinite;
+  }
+  @keyframes lightSweep{
+    0%,100%{transform:translate3d(0,0,0) rotate(0.001deg)}
+    50%{transform:translate3d(-3%, -2%, 0)}
+  }
+
+  .hero-grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:28px; align-items:center}
+  .hero h1{font-size: clamp(28px, 5.4vw, 48px); margin:0 0 10px; line-height:1.08}
+  .sub{color:var(--muted); font-size: clamp(14px, 2.2vw, 18px); margin:0 0 18px}
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 24px}
+  .badge{border:1px solid var(--line); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; backdrop-filter:blur(2px)}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+  .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:#0e0e0e; color:#fff; font-weight:900; cursor:pointer; transform:translateZ(0); position:relative; overflow:hidden}
+  .btn.primary{background:#fff; color:#000}
+  .btn.whatsapp{border-color:rgba(37,211,102,.6)}
+  .btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  /* brillo en botones */
+  .btn::after{
+    content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 45%, transparent 55%);
+    transform:translateX(-120%); transition:transform .6s ease;
+  }
+  .btn:hover::after{transform:translateX(120%)}
+  .btn svg{width:18px;height:18px}
+
+  .hero-card{
+    background:linear-gradient(180deg,#121212,#0f0f0f); padding:20px; border-radius:var(--radius);
+    border:1px solid var(--line); box-shadow:var(--shadow);
+    transform-style:preserve-3d; perspective:800px;
+  }
+  .hero-card:hover{transform:translateY(-3px)}
+  .hero-card h3{margin:0 0 8px}
+  .hero-card .line{display:flex; justify-content:space-between; color:var(--muted); font-size:14px; padding:6px 0; border-bottom:1px dashed var(--line)}
+  .pulse{animation:glow 2.6s ease-in-out infinite}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)} 50%{box-shadow:0 0 34px rgba(255,255,255,.08)}}
+
+  /* visual con tu imagen */
+  .hero-visual{
+    position:relative; border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.5);
+    background: #0f0f0f;
+  }
+  .hero-visual img{width:100%; height:auto; object-fit:cover; transform:scale(1.02); will-change:transform}
+  /* resplandor del visual */
+  .hero-visual::before{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(60% 35% at 70% 20%, rgba(255,255,255,.12), transparent 60%);
+    mix-blend-mode: screen; pointer-events:none;
+  }
+
+  /* orbes/flotantes */
+  .orb{position:absolute; width:420px; height:420px; filter: blur(60px); border-radius:50%; pointer-events:none; z-index:-2; opacity:.35; mix-blend-mode:screen}
+  .orb.one{left:-120px; top:-80px; background:radial-gradient(closest-side, #fff, transparent); animation:float 14s ease-in-out infinite}
+  .orb.two{right:-160px; top:20%; background:radial-gradient(closest-side, #bfbfbf, transparent); animation:float 18s ease-in-out infinite reverse}
+  .orb.three{left:40%; bottom:-160px; background:radial-gradient(closest-side, #ffffff, transparent); animation:float 22s ease-in-out infinite}
+  @keyframes float{
+    0%,100%{transform:translate3d(0,0,0)}
+    50%{transform:translate3d(20px,-18px,0)}
+  }
+
+  /* ===== Sections & cards ===== */
+  section{padding:68px 0; border-top:1px solid var(--line); position:relative}
+  .section-head{display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:20px}
+  .section-head h2{margin:0;font-size: clamp(22px, 4vw, 34px)}
+  .section-head p{margin:0;color:var(--muted)}
+  .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px}
+  .card{background:linear-gradient(180deg,#121212,#0f0f0f); padding:18px; border:1px solid var(--line); border-radius:var(--radius); display:grid; gap:10px; transition:transform .25s ease, box-shadow .25s ease}
+  .card:hover{transform:translateY(-6px); box-shadow:0 18px 42px rgba(0,0,0,.45)}
+  .card .icon{width:46px; height:46px; border-radius:10px; border:1px solid var(--line); display:grid; place-items:center; background:#0e0e0e}
+  .tag{font-size:12px; color:#000; background:#bfbfbf; border-radius:999px; padding:4px 8px; font-weight:800; justify-self:start}
+  .card p{color:var(--muted); margin:0}
+  .card-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+
+  /* ===== Pricing ===== */
+  .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .price-card{position:relative; border:1px solid var(--line); background:linear-gradient(180deg,#141414,#0e0e0e); border-radius:20px; padding:22px; box-shadow:var(--shadow)}
+  .price{font-size: clamp(28px, 4.6vw, 40px); font-weight:900; margin:8px 0}
+  .feature{display:flex; align-items:center; gap:10px; color:var(--muted); margin:8px 0}
+  .feature svg{width:18px;height:18px}
+  .ribbon{position:absolute; top:14px; right:14px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#0d0d0d; color:#fff; font-weight:800}
+
+  /* ===== Steps ===== */
+  .steps{display:grid; grid-template-columns: repeat(5, 1fr); gap:16px}
+  .step{background:#0f0f0f; border:1px solid var(--line); border-radius:var(--radius); padding:16px; transition:transform .25s ease}
+  .step:hover{transform:translateY(-5px)}
+  .step h3{margin:6px 0 8px; font-size:18px}
+  .step p{margin:0;color:var(--muted)}
+
+  /* ===== FAQ ===== */
+  details{border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:#0e0e0e}
+  summary{cursor:pointer; font-weight:800}
+  details p{color:var(--muted)}
+  .faq{display:grid; gap:12px}
+
+  /* ===== Contacto ===== */
+  .contact-wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
+  form{display:grid; gap:10px}
+  input, select, textarea{width:100%; background:#0e0e0e; border:1px solid var(--line); color:#fff; border-radius:12px; padding:12px; outline:none}
+  input:focus, select:focus, textarea:focus{border-color:#bfbfbf}
+  .helper{font-size:12px;color:var(--muted)}
+
+  /* ===== Footer ===== */
+  footer{padding:24px 0 90px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
+  .cols{display:grid; grid-template-columns: 2fr 1fr 1fr; gap:16px}
+  .social{display:flex; gap:10px}
+  .kicker{font-size:12px; color:var(--muted)}
+
+  /* ===== Flotantes ===== */
+  .wa-float{position:fixed; right:16px; bottom:16px; z-index:9999; display:flex; align-items:center; gap:10px; background:#000; border:1px solid rgba(37,211,102,.6); color:#fff; padding:12px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800}
+  .sticky-cta{position:fixed; left:0; right:0; bottom:0; display:flex; justify-content:center; gap:10px; padding:10px; background:rgba(0,0,0,.7); border-top:1px solid var(--line); backdrop-filter:blur(8px); z-index:9998}
+
+  /* ===== Reveal/Parallax ===== */
+  .reveal{opacity:0; transform:translateY(14px)}
+  .reveal.in{opacity:1; transform:none; animation:fadeUp .7s ease both}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)}}
+  .shine{background:linear-gradient(90deg, #fff, #bfbfbf, #fff); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:shine 3.5s linear infinite}
+  @keyframes shine{from{background-position:-200% 0} to{background-position:200% 0}}
+
+  /* ===== Responsive ===== */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .pricing{grid-template-columns:1fr}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .contact-wrap{grid-template-columns:1fr}
+    .cols{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    nav ul{display:none}
+    .menu-btn{display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); background:#0e0e0e; color:#fff; padding:8px 12px; border-radius:10px}
+    .menu-open nav ul{display:flex; position:absolute; top:58px; right:4%; background:#0e0e0e; border:1px solid var(--line); padding:12px; border-radius:12px; flex-direction:column; gap:12px}
+    .grid{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .cols{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .reveal.in{animation:none!important; transform:none!important}
+    .shine{animation:none!important}
+    .pulse{animation:none!important}
+    .hero::after{animation:none!important}
+    .orb{animation:none!important}
+  }
+</style>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"Web Corporativa Profesional",
+  "provider":{
+    "@type":"Organization",
+    "name":"Servicios Jey",
+    "logo":"https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png",
+    "areaServed":"Santo Domingo Este"
+  },
+  "serviceType":"Diseño y despliegue de página web corporativa",
+  "offers":{
+    "@type":"Offer",
+    "priceCurrency":"DOP",
+    "price":"800",
+    "description":"Suscripción mensual. Pago inicial RD$1,000. 1 semana de prueba gratis. Propiedad tras 4 meses. Pago cada 25 de mes."
+  }
+}
+</script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand">
+      <div class="logo" aria-hidden="true">
+        <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
+      </div>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">Menú ▾</button>
+    <nav>
+      <ul>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#plan">Plan</a></li>
+        <li><a href="#pasos">Cómo funciona</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="cta pulse" id="ctaHeader" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener">Pedir prueba gratis</a>
+  </div>
+</header>
+
+<main id="home">
+  <!-- orbes flotantes -->
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1 class="reveal shine">Tu Web Corporativa lista en 2–3 días</h1>
+        <p class="sub reveal">Diseño personalizado + dominio + hosting + WhatsApp integrado. <b>RD$800/mes</b> + <b>RD$1,000 inicial</b>. <u>1 semana de prueba gratis</u>.</p>
+        <div class="badges reveal">
+          <span class="badge">Propiedad tras 4 meses</span>
+          <span class="badge">Pago cada 25</span>
+          <span class="badge">SSL y rendimiento</span>
+          <span class="badge">Soporte y cambios mensuales</span>
+        </div>
+        <div class="hero-actions reveal">
+          <a class="btn primary" data-cta>Quiero mi semana gratis</a>
+          <a class="btn whatsapp" data-cta>Hablar por WhatsApp</a>
+          <a class="btn" href="#plan">Ver plan y precio</a>
+        </div>
+      </div>
+
+      <!-- Visual con TU imagen -->
+      <div class="hero-visual reveal parallax" data-parallax="0.06" aria-label="Vista previa">
+        <img src="https://i.postimg.cc/bv1Zv6TQ/Chat-GPT-Image-10-ago-2025-10-59-07-p-m.png" alt="Web corporativa - Servicios Jey">
+      </div>
+
+      <div class="hero-card reveal" aria-label="Resumen del plan">
+        <h3>Plan Web Corporativa</h3>
+        <div class="line"><span>RD$800/mes</span><span>Suscripción con soporte</span></div>
+        <div class="line"><span>RD$1,000</span><span>Pago inicial (activación)</span></div>
+        <div class="line"><span>7 días</span><span>Prueba gratis sin compromiso</span></div>
+        <div class="line"><span>25 de cada mes</span><span>Fecha de cobro</span></div>
+        <div class="line"><span>4 meses</span><span>Propiedad del sitio</span></div>
+        <div class="hero-actions"><a class="btn primary" data-cta>Empezar ahora</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section id="beneficios">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Beneficios que impulsan tu negocio</h2>
+        <p class="reveal">No es solo una web. Es credibilidad, contacto directo y presencia en Google.</p>
+      </div>
+      <div class="grid">
+        <article class="card reveal">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M12 2 2 7l10 5 10-5-10-5Zm0 7L2 4v13h20V4l-10 5Z"/></svg></div>
+          <strong>Imagen profesional</strong>
+          <p>Diseño moderno adaptado a tu marca. Inspira confianza desde el primer segundo.</p>
+          <div class="card-actions"><a class="btn small" data-cta>Quiero esto</a></div>
+        </article>
+        <article class="card reveal">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"/></svg></div>
+          <strong>Más contactos</strong>
+          <p>Botón a WhatsApp y llamadas. Convierte visitas en conversaciones reales.</p>
+          <div class="card-actions"><a class="btn small" data-cta>Hablemos</a></div>
+        </article>
+        <article class="card reveal">
+          <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 4h18v2H3zM3 11h18v2H3zM3 18h18v2H3z"/></svg></div>
+          <strong>Visible en Google</strong>
+          <p>SEO básico para que te encuentren. Indexación y buenas prácticas técnicas.</p>
+          <div class="card-actions"><a class="btn small" href="#plan">Ver qué incluye</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section id="plan">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Plan único. Precio claro.</h2>
+        <p class="reveal">Sin letras pequeñas: mensualidad baja, soporte real y resultados rápidos.</p>
+      </div>
+      <div class="pricing">
+        <article class="price-card reveal" aria-label="Plan Web Corporativa">
+          <span class="ribbon">Más vendido</span>
+          <h3>Web Corporativa Profesional</h3>
+          <div class="price">RD$800<span style="font-size:.6em">/mes</span></div>
+          <div class="feature"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Diseño personalizado, móvil-first</div>
+          <div class="feature"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Dominio + hosting + SSL</div>
+          <div class="feature"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>WhatsApp integrado</div>
+          <div class="feature"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Actualizaciones mensuales</div>
+          <div class="feature"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Entrega en 2–3 días hábiles</div>
+          <hr style="border-color:var(--line); opacity:.5; margin:14px 0">
+          <div class="feature"><b>RD$1,000</b> inicial (activación)</div>
+          <div class="feature"><b>1 semana</b> de prueba gratis</div>
+          <div class="feature">Propiedad tras <b>4 meses</b></div>
+          <div class="feature">Cobro el <b>25</b> de cada mes</div>
+          <div class="hero-actions" style="margin-top:12px">
+            <a class="btn primary" data-cta>Quiero mi prueba</a>
+            <a class="btn whatsapp" data-cta>Contratar ahora</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="pasos">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Cómo funciona</h2>
+        <p class="reveal">Un proceso simple para lanzar tu web en días, no semanas.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal"><div class="icon"><span class="tag">1</span></div><h3>Agenda</h3><p>Escríbenos por WhatsApp y reserva tu semana de prueba.</p></div>
+        <div class="step reveal"><div class="icon"><span class="tag">2</span></div><h3>Personaliza</h3><p>Envíanos logo, textos y fotos. Nosotros armamos tu web.</p></div>
+        <div class="step reveal"><div class="icon"><span class="tag">3</span></div><h3>Entrega</h3><p>Listo en 2–3 días hábiles. Revisa y pide ajustes menores.</p></div>
+        <div class="step reveal"><div class="icon"><span class="tag">4</span></div><h3>Prueba gratis</h3><p>7 días funcionando para que veas resultados.</p></div>
+        <div class="step reveal"><div class="icon"><span class="tag">5</span></div><h3>Activa</h3><p>Paga el inicial y continúas con RD$800/mes (cada 25). Propiedad tras 4 meses.</p></div>
+      </div>
+      <div class="hero-actions" style="margin-top:20px"><a class="btn primary" data-cta>Empezar hoy</a></div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Mira un ejemplo</h2>
+        <p class="reveal">Este es solo un modelo. Tu web será 100% adaptada a tu marca.</p>
+      </div>
+      <div class="card reveal" style="display:grid; gap:12px">
+        <p>Vista previa en vivo:</p>
+        <div class="card-actions">
+          <a class="btn primary" href="https://serviciosjey.github.io/Servicios-Ubiera/" target="_blank" rel="noopener">Ver demo</a>
+          <a class="btn" data-cta>Quiero una igual para mi negocio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Preguntas frecuentes</h2>
+        <p class="reveal">Transparencia total: así trabajamos.</p>
+      </div>
+      <div class="faq">
+        <details class="reveal"><summary>¿Qué incluye el servicio?</summary><p>Diseño personalizado, dominio, hosting, SSL, WhatsApp integrado, SEO básico, soporte y <b>actualizaciones mensuales</b> de contenido.</p></details>
+        <details class="reveal"><summary>¿La página es mía?</summary><p>Sí, la propiedad es tuya <b>después de 4 meses</b> con el plan activo y al día.</p></details>
+        <details class="reveal"><summary>¿Cuándo se paga?</summary><p>La mensualidad se paga <b>cada 25 de cada mes</b>. El pago inicial es de <b>RD$1,000</b> para activación.</p></details>
+        <details class="reveal"><summary>¿Cómo funciona la semana de prueba gratis?</summary><p>Te entregamos tu web funcional por <b>7 días</b>. Si continúas, pagas el inicial y la mensualidad se cobra en la <b>próxima fecha (25)</b>. Si no, no pagas nada.</p></details>
+        <details class="reveal"><summary>¿Cuánto tardan en entregarla?</summary><p>Entre <b>2 y 3 días hábiles</b> desde que recibimos logo, textos y fotos.</p></details>
+        <details class="reveal"><summary>¿Puedo pedir funciones extra?</summary><p>Claro. Formularios especiales, secciones nuevas o integraciones adicionales se cotizan aparte.</p></details>
+      </div>
+      <div class="hero-actions" style="margin-top:18px"><a class="btn primary" data-cta>Quiero mi prueba gratis</a></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="reveal">Hablemos de tu web</h2>
+        <p class="reveal">Respondo rápido. En pocos días puedes estar online.</p>
+      </div>
+      <div class="contact-wrap">
+        <form id="quoteForm" class="reveal" aria-label="Formulario de contacto">
+          <input type="text" name="nombre" placeholder="Tu nombre" required>
+          <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
+          <input type="text" name="negocio" placeholder="Nombre de tu negocio" required>
+          <textarea name="detalle" rows="5" placeholder="Cuéntame qué haces y qué quieres que aparezca en tu web (servicios, horarios, ubicación)"></textarea>
+          <div class="helper">Al enviar, se abrirá WhatsApp con tu solicitud prellenada.</div>
+          <button class="btn primary" type="submit">Enviar por WhatsApp</button>
+          <a class="btn" href="mailto:serviciosjey@gmail.com?subject=Cotizaci%C3%B3n%20Web%20Corporativa%20Servicios%20Jey">Enviar por correo</a>
+        </form>
+        <aside class="card reveal">
+          <strong>Datos de contacto</strong>
+          <p><b>WhatsApp:</b> <a href="https://wa.me/18094862675" target="_blank" rel="noopener">(809) 486-2675</a></p>
+          <p><b>Zona:</b> Urbanización Italia, Santo Domingo Este</p>
+          <p><b>Instagram:</b> <a href="https://www.instagram.com/servicios_jey/" target="_blank" rel="noopener">@servicios_jey</a></p>
+          <p class="kicker">Cupos limitados por semana para entregas en 2–3 días.</p>
+          <div class="hero-actions"><a class="btn whatsapp" data-cta>Quiero empezar</a></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container cols">
+    <div>
+      <div class="brand" style="margin-bottom:8px">
+        <div class="logo" aria-hidden="true">
+          <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
+        </div>
+      </div>
+      <div>En <b>Servicios Jey</b> construimos <b>Webs Corporativas</b> que venden: claras, rápidas y con contacto directo por WhatsApp.</div>
+    </div>
+    <div>
+      <strong>Secciones</strong>
+      <ul style="list-style:none; padding:0; margin:10px 0 0; color:var(--muted)">
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#plan">Plan</a></li>
+        <li><a href="#pasos">Cómo funciona</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div>
+      <strong>Redes</strong>
+      <div class="social" style="margin-top:10px">
+        <a class="cta" href="https://www.instagram.com/servicios_jey/" target="_blank" rel="noopener">Instagram</a>
+        <a class="cta" href="https://wa.me/18094862675" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top:16px">© <span id="year"></span> Servicios Jey — Todos los derechos reservados.</div>
+</footer>
+
+<!-- CTA flotantes -->
+<a class="wa-float" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener" aria-label="Abrir chat de WhatsApp">Chatea ahora</a>
+<div class="sticky-cta" id="stickyCta" hidden>
+  <a class="btn primary" data-cta>Prueba gratis 7 días</a>
+  <a class="btn whatsapp" data-cta>Contratar</a>
+</div>
+
+<script>
+  // Año dinámico
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Menú móvil
+  const menuBtn = document.getElementById('menuBtn');
+  menuBtn?.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if(el){
+        e.preventDefault();
+        window.scrollTo({top: el.offsetTop-70, behavior:'smooth'});
+        document.body.classList.remove('menu-open');
+      }
+    });
+  });
+
+  // Intersection Observer para reveal
+  const io = new IntersectionObserver((entries)=>{
+    for(const en of entries){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    }
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+  // Parallax suave en elementos con data-parallax
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    parallaxEls.forEach(el=>{
+      const f = parseFloat(el.dataset.parallax||'0.05');
+      el.style.transform = `translateY(${y * f}px)`;
+    });
+  }, {passive:true});
+
+  // CTA universal a WhatsApp
+  const waNumber = '18094862675';
+  function openWA(msg){
+    const url = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank', 'noopener');
+  }
+  const defaultMsg = 'Hola Servicios Jey, quiero mi SEMANA DE PRUEBA GRATIS de la Web Corporativa. Mi nombre es ____ y mi negocio es ____.';
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('click', ()=> openWA(defaultMsg));
+  });
+
+  // Sticky CTA al hacer scroll
+  const sticky = document.getElementById('stickyCta');
+  let shown = false;
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY;
+    if(y > 480 && !shown){
+      sticky.hidden = false;
+      sticky.animate([{transform:'translateY(100%)'},{transform:'translateY(0)'}],{duration:300, easing:'ease-out'});
+      shown = true;
+    }
+    if(y < 200 && shown){ sticky.hidden = true; shown = false; }
+  });
+
+  // Formulario -> WhatsApp
+  const form = document.getElementById('quoteForm');
+  form?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fd = new FormData(form);
+    const nombre = (fd.get('nombre')||'').trim();
+    const telefono = (fd.get('telefono')||'').trim();
+    const negocio = (fd.get('negocio')||'').trim();
+    const detalle = (fd.get('detalle')||'').trim();
+    const msg = `Hola Servicios Jey, quiero la Web Corporativa.\nNombre: ${nombre||'—'}\nTeléfono: ${telefono||'—'}\nNegocio: ${negocio||'—'}\nDetalle: ${detalle||'—'}\nQuiero iniciar con la semana de prueba gratis.`;
+    openWA(msg);
+  });
+
+  // ===== Utilidades seguras para localStorage =====
+  const LS = { get(k, f=null){try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}}, set(k,v){try{localStorage.setItem(k, JSON.stringify(v))}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}} };
+  // Persistencia básica del formulario
+  const FORM_KEY = 'sj_webcorp_form_v2';
+  function loadForm(){
+    if(!form) return;
+    const d=LS.get(FORM_KEY, {});
+    ['nombre','telefono','negocio','detalle'].forEach(k=>{ if(form.elements[k] && d[k]) form.elements[k].value = d[k]; });
+  }
+  function saveForm(){
+    if(!form) return;
+    const p={};
+    ['nombre','telefono','negocio','detalle'].forEach(k=> p[k]=(form.elements[k]?.value||'').trim());
+    LS.set(FORM_KEY, p);
+  }
+  document.addEventListener('DOMContentLoaded', loadForm);
+  ['input','change'].forEach(evt => form?.addEventListener(evt, saveForm));
+</script>
+</body>
+</html>
