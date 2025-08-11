@@ -21,7 +21,7 @@
     --ink:#f2f2f2;
     --muted:#bfbfbf;
     --line:#262626;
-    --brand:#bfbfbf; /* gris de marca */
+    --brand:#bfbfbf;
     --ok:#25D366;
     --radius:16px;
     --shadow: 0 10px 30px rgba(0,0,0,.35);
@@ -43,87 +43,90 @@
   .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.5px}
   .logo{width:85px; height:50px; border-radius:5px; background:#fff; display:grid; place-items:center; border:1px solid var(--line)}
   .logo img{width:75px;height:100%;object-fit:contain;padding:4px}
-  nav ul{display:flex; gap:18px; list-style:none; padding:0;margin:0;font-weight:600}
-  .cta{display:inline-flex; align-items:center; gap:10px; font-weight:800; background:#000; border:1px solid var(--brand); color:#fff; padding:10px 16px; border-radius:12px}
-  .menu-btn{display:none}
+  /* menú a la derecha con icono */
+  .menu-toggle{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#0e0e0e; border:1px solid var(--line); color:#fff;
+    padding:10px 12px; border-radius:12px; font-weight:800; cursor:pointer;
+  }
+  .menu-toggle svg{width:20px;height:20px}
 
-  /* ===== Hero ===== */
+  /* ===== Drawer derecho ===== */
+  .scrim{
+    position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(2px);
+    opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:9998;
+  }
+  .drawer{
+    position:fixed; right:0; top:0; bottom:0; width:min(86vw,380px);
+    background:#0f0f0f; border-left:1px solid var(--line); box-shadow: -16px 0 40px rgba(0,0,0,.4);
+    transform:translateX(100%); transition:transform .3s ease; z-index:9999; display:flex; flex-direction:column;
+  }
+  .drawer header{position:sticky; top:0; background:#0f0f0f; border-bottom:1px solid var(--line)}
+  .drawer .content{padding:16px; display:grid; gap:12px}
+  .drawer nav a{display:block; padding:12px 10px; border:1px solid var(--line); border-radius:12px; margin-bottom:8px}
+  .drawer .close{
+    position:absolute; left:12px; top:12px; background:#0e0e0e; border:1px solid var(--line);
+    color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:6px
+  }
+  .drawer-open .drawer{transform:none}
+  .drawer-open .scrim{opacity:1; pointer-events:auto}
+
+  /* ===== Hero (imagen completa sin blur de fondo) ===== */
   .hero{
-    position:relative; overflow:hidden; padding:72px 0 24px;
-    background:
-      radial-gradient(800px 400px at 85% -10%, #1a1a1a 0%, transparent 60%),
-      radial-gradient(600px 300px at 10% 10%, #151515 0%, transparent 60%);
-    isolation:isolate;
+    position:relative; overflow:hidden; padding:96px 0 48px;
+    min-height: 80vh; display:flex; align-items:flex-end; isolation:isolate;
+    background: url("https://i.postimg.cc/bv1Zv6TQ/Chat-GPT-Image-10-ago-2025-10-59-07-p-m.png") center/cover no-repeat;
   }
-  /* spotlight/iluminación */
-  .hero::after{
-    content:""; position:absolute; inset:-40%;
-    background:
-      radial-gradient(60% 60% at 65% 35%, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(35% 35% at 25% 75%, rgba(255,255,255,.05), transparent 70%);
-    filter: blur(18px);
-    z-index:-1; pointer-events:none;
-    animation: lightSweep 9s ease-in-out infinite;
+  /* contenedor interior */
+  .hero-inner{width:min(1100px,92%); margin:0 auto; position:relative; z-index:2}
+
+  /* ===== Panel de contenido con “nube” animada ===== */
+  .cloud{
+    position:relative; padding: clamp(14px, 3.5vw, 24px); color:#fff;
+    /* Sin bordes marcados: usar máscara de desvanecido suave */
+    -webkit-mask-image: radial-gradient(140% 100% at 50% 50%, #000 70%, transparent 100%);
+            mask-image: radial-gradient(140% 100% at 50% 50%, #000 70%, transparent 100%);
+    border-radius:24px; overflow:hidden;
   }
-  @keyframes lightSweep{
-    0%,100%{transform:translate3d(0,0,0) rotate(0.001deg)}
-    50%{transform:translate3d(-3%, -2%, 0)}
+  /* capas nebulosas animadas */
+  .cloud::before,
+  .cloud::after{
+    content:""; position:absolute; inset:-30%;
+    background:
+      radial-gradient(40% 35% at 20% 30%, rgba(255,255,255,.08), transparent 60%),
+      radial-gradient(35% 30% at 70% 60%, rgba(255,255,255,.07), transparent 65%),
+      radial-gradient(28% 24% at 40% 80%, rgba(255,255,255,.06), transparent 70%),
+      radial-gradient(30% 28% at 80% 20%, rgba(255,255,255,.05), transparent 70%);
+    filter: blur(16px);
+    mix-blend-mode: screen;
+    animation: cloudMove 36s linear infinite;
+    pointer-events:none; z-index:-1;
+  }
+  .cloud::after{
+    animation-duration: 54s;
+    animation-direction: reverse;
+  }
+  @keyframes cloudMove{
+    0%{transform: translate3d(-4%, -2%, 0) scale(1)}
+    50%{transform: translate3d(4%, 3%, 0) scale(1.03)}
+    100%{transform: translate3d(-4%, -2%, 0) scale(1)}
   }
 
-  .hero-grid{display:grid; grid-template-columns: 1.05fr .95fr; gap:28px; align-items:center}
-  .hero h1{font-size: clamp(28px, 5.4vw, 48px); margin:0 0 10px; line-height:1.08}
-  .sub{color:var(--muted); font-size: clamp(14px, 2.2vw, 18px); margin:0 0 18px}
-  .badges{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 24px}
-  .badge{border:1px solid var(--line); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; backdrop-filter:blur(2px)}
-  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
-  .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:#0e0e0e; color:#fff; font-weight:900; cursor:pointer; transform:translateZ(0); position:relative; overflow:hidden}
+  .hero h1{font-size: clamp(28px, 5.6vw, 54px); margin:0 0 10px; line-height:1.06}
+  .sub{color:var(--muted); font-size: clamp(14px, 2.2vw, 18px); margin:0 0 16px}
+  .badges{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px}
+  .badge{border:1px solid var(--line); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; background:rgba(0,0,0,.35); backdrop-filter: blur(3px)}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap}
+
+  /* Botones */
+  .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:12px; background:#0e0e0e; color:#fff; font-weight:900; cursor:pointer; position:relative; overflow:hidden}
   .btn.primary{background:#fff; color:#000}
   .btn.whatsapp{border-color:rgba(37,211,102,.6)}
-  .btn:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.35)}
-  /* brillo en botones */
-  .btn::after{
-    content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 45%, transparent 55%);
-    transform:translateX(-120%); transition:transform .6s ease;
-  }
+  .btn::after{content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 45%, transparent 55%); transform:translateX(-120%); transition:transform .6s ease}
   .btn:hover::after{transform:translateX(120%)}
-  .btn svg{width:18px;height:18px}
 
-  .hero-card{
-    background:linear-gradient(180deg,#121212,#0f0f0f); padding:20px; border-radius:var(--radius);
-    border:1px solid var(--line); box-shadow:var(--shadow);
-    transform-style:preserve-3d; perspective:800px;
-  }
-  .hero-card:hover{transform:translateY(-3px)}
-  .hero-card h3{margin:0 0 8px}
-  .hero-card .line{display:flex; justify-content:space-between; color:var(--muted); font-size:14px; padding:6px 0; border-bottom:1px dashed var(--line)}
-  .pulse{animation:glow 2.6s ease-in-out infinite}
-  @keyframes glow{0%,100%{box-shadow:0 0 0 rgba(255,255,255,0)} 50%{box-shadow:0 0 34px rgba(255,255,255,.08)}}
-
-  /* visual con tu imagen */
-  .hero-visual{
-    position:relative; border:1px solid var(--line); border-radius:22px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.5);
-    background: #0f0f0f;
-  }
-  .hero-visual img{width:100%; height:auto; object-fit:cover; transform:scale(1.02); will-change:transform}
-  /* resplandor del visual */
-  .hero-visual::before{
-    content:""; position:absolute; inset:0;
-    background: radial-gradient(60% 35% at 70% 20%, rgba(255,255,255,.12), transparent 60%);
-    mix-blend-mode: screen; pointer-events:none;
-  }
-
-  /* orbes/flotantes */
-  .orb{position:absolute; width:420px; height:420px; filter: blur(60px); border-radius:50%; pointer-events:none; z-index:-2; opacity:.35; mix-blend-mode:screen}
-  .orb.one{left:-120px; top:-80px; background:radial-gradient(closest-side, #fff, transparent); animation:float 14s ease-in-out infinite}
-  .orb.two{right:-160px; top:20%; background:radial-gradient(closest-side, #bfbfbf, transparent); animation:float 18s ease-in-out infinite reverse}
-  .orb.three{left:40%; bottom:-160px; background:radial-gradient(closest-side, #ffffff, transparent); animation:float 22s ease-in-out infinite}
-  @keyframes float{
-    0%,100%{transform:translate3d(0,0,0)}
-    50%{transform:translate3d(20px,-18px,0)}
-  }
-
-  /* ===== Sections & cards ===== */
-  section{padding:68px 0; border-top:1px solid var(--line); position:relative}
+  /* ===== Secciones comunes ===== */
+  section{padding:68px 0; border-top:1px solid var(--line); position:relative; background:transparent}
   .section-head{display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:20px}
   .section-head h2{margin:0;font-size: clamp(22px, 4vw, 34px)}
   .section-head p{margin:0;color:var(--muted)}
@@ -135,7 +138,7 @@
   .card p{color:var(--muted); margin:0}
   .card-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
 
-  /* ===== Pricing ===== */
+  /* Pricing */
   .pricing{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
   .price-card{position:relative; border:1px solid var(--line); background:linear-gradient(180deg,#141414,#0e0e0e); border-radius:20px; padding:22px; box-shadow:var(--shadow)}
   .price{font-size: clamp(28px, 4.6vw, 40px); font-weight:900; margin:8px 0}
@@ -143,46 +146,41 @@
   .feature svg{width:18px;height:18px}
   .ribbon{position:absolute; top:14px; right:14px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#0d0d0d; color:#fff; font-weight:800}
 
-  /* ===== Steps ===== */
+  /* Steps */
   .steps{display:grid; grid-template-columns: repeat(5, 1fr); gap:16px}
   .step{background:#0f0f0f; border:1px solid var(--line); border-radius:var(--radius); padding:16px; transition:transform .25s ease}
   .step:hover{transform:translateY(-5px)}
   .step h3{margin:6px 0 8px; font-size:18px}
   .step p{margin:0;color:var(--muted)}
 
-  /* ===== FAQ ===== */
+  /* FAQ */
   details{border:1px solid var(--line); border-radius:12px; padding:12px 14px; background:#0e0e0e}
   summary{cursor:pointer; font-weight:800}
   details p{color:var(--muted)}
   .faq{display:grid; gap:12px}
 
-  /* ===== Contacto ===== */
+  /* Contacto */
   .contact-wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:16px}
   form{display:grid; gap:10px}
   input, select, textarea{width:100%; background:#0e0e0e; border:1px solid var(--line); color:#fff; border-radius:12px; padding:12px; outline:none}
   input:focus, select:focus, textarea:focus{border-color:#bfbfbf}
   .helper{font-size:12px;color:var(--muted)}
 
-  /* ===== Footer ===== */
+  /* Footer */
   footer{padding:24px 0 90px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
   .cols{display:grid; grid-template-columns: 2fr 1fr 1fr; gap:16px}
   .social{display:flex; gap:10px}
   .kicker{font-size:12px; color:var(--muted)}
 
-  /* ===== Flotantes ===== */
-  .wa-float{position:fixed; right:16px; bottom:16px; z-index:9999; display:flex; align-items:center; gap:10px; background:#000; border:1px solid rgba(37,211,102,.6); color:#fff; padding:12px 16px; border-radius:999px; box-shadow:var(--shadow); font-weight:800}
-  .sticky-cta{position:fixed; left:0; right:0; bottom:0; display:flex; justify-content:center; gap:10px; padding:10px; background:rgba(0,0,0,.7); border-top:1px solid var(--line); backdrop-filter:blur(8px); z-index:9998}
-
-  /* ===== Reveal/Parallax ===== */
+  /* Reveal */
   .reveal{opacity:0; transform:translateY(14px)}
   .reveal.in{opacity:1; transform:none; animation:fadeUp .7s ease both}
   @keyframes fadeUp{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)}}
   .shine{background:linear-gradient(90deg, #fff, #bfbfbf, #fff); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:shine 3.5s linear infinite}
   @keyframes shine{from{background-position:-200% 0} to{background-position:200% 0}}
 
-  /* ===== Responsive ===== */
+  /* Responsive */
   @media (max-width:980px){
-    .hero-grid{grid-template-columns:1fr}
     .grid{grid-template-columns:repeat(2,1fr)}
     .pricing{grid-template-columns:1fr}
     .steps{grid-template-columns:repeat(2,1fr)}
@@ -190,9 +188,6 @@
     .cols{grid-template-columns:1fr 1fr}
   }
   @media (max-width:640px){
-    nav ul{display:none}
-    .menu-btn{display:inline-flex; align-items:center; gap:10px; border:1px solid var(--line); background:#0e0e0e; color:#fff; padding:8px 12px; border-radius:10px}
-    .menu-open nav ul{display:flex; position:absolute; top:58px; right:4%; background:#0e0e0e; border:1px solid var(--line); padding:12px; border-radius:12px; flex-direction:column; gap:12px}
     .grid{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .cols{grid-template-columns:1fr}
@@ -200,72 +195,8 @@
   @media (prefers-reduced-motion: reduce){
     .reveal, .reveal.in{animation:none!important; transform:none!important}
     .shine{animation:none!important}
-    .pulse{animation:none!important}
-    .hero::after{animation:none!important}
-    .orb{animation:none!important}
+    .cloud::before, .cloud::after{animation:none!important}
   }
-  /* ===== HERO con imagen de fondo y desvanecido ===== */
-.hero{
-  position:relative; overflow:hidden; padding:92px 0 48px;
-  min-height: 72vh; isolation:isolate;
-  display:flex; align-items:flex-end;
-  /* imagen + gradiente superior para legibilidad */
-  background:
-    linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 40%, rgba(11,11,11,.75) 70%, rgba(11,11,11,1) 100%),
-    url("https://i.postimg.cc/bv1Zv6TQ/Chat-GPT-Image-10-ago-2025-10-59-07-p-m.png") center/cover no-repeat;
-  /* desvanecido inferior suave (mask) */
-  -webkit-mask-image: linear-gradient(#000 75%, transparent 100%);
-          mask-image: linear-gradient(#000 75%, transparent 100%);
-}
-/* viñeta lateral suave */
-.hero::before{
-  content:""; position:absolute; inset:0;
-  background:
-    radial-gradient(60% 60% at 80% 20%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(40% 40% at 10% 80%, rgba(255,255,255,.05), transparent 70%);
-  mix-blend-mode: screen; pointer-events:none;
-  animation: heroGlow 10s ease-in-out infinite;
-}
-@keyframes heroGlow{
-  0%,100%{transform:translate3d(0,0,0)}
-  50%{transform:translate3d(-1%, -1%, 0)}
-}
-
-/* contenedor del contenido para no pegar el texto al borde */
-.hero-inner{width:min(1100px,92%); margin:0 auto; position:relative; z-index:2}
-
-/* bloque de texto con blur/fondo translúcido */
-.hero-blur{
-  display:inline-block;
-  background: rgba(0,0,0,.35);
-  backdrop-filter: blur(8px);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius: 18px;
-  padding: clamp(14px, 3.5vw, 24px);
-  box-shadow: 0 20px 50px rgba(0,0,0,.45);
-  animation: fadeUp .7s ease both;
-}
-.hero h1{font-size: clamp(28px, 5.6vw, 54px); margin:0 0 10px; line-height:1.06}
-.hero .sub{color:var(--muted); font-size: clamp(14px, 2.2vw, 18px); margin:0 0 16px}
-.badges{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0 18px}
-.badge{border:1px solid var(--line); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; background:rgba(0,0,0,.35); backdrop-filter: blur(3px)}
-.hero-actions{display:flex; gap:12px; flex-wrap:wrap}
-
-/* brillo sutil al hacer hover en CTA */
-.btn{position:relative; overflow:hidden}
-.btn::after{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(110deg, transparent 0%, rgba(255,255,255,.18) 45%, transparent 55%);
-  transform:translateX(-120%); transition:transform .6s ease;
-}
-.btn:hover::after{transform:translateX(120%)}
-
-/* responsive: centra todo en móvil */
-@media (max-width: 640px){
-  .hero{padding:84px 0 36px; min-height: 68vh}
-  .hero-blur{padding: 16px}
-}
-
 </style>
 
 <!-- Schema.org -->
@@ -274,19 +205,9 @@
   "@context":"https://schema.org",
   "@type":"Service",
   "name":"Web Corporativa Profesional",
-  "provider":{
-    "@type":"Organization",
-    "name":"Servicios Jey",
-    "logo":"https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png",
-    "areaServed":"Santo Domingo Este"
-  },
+  "provider":{"@type":"Organization","name":"Servicios Jey","logo":"https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png","areaServed":"Santo Domingo Este"},
   "serviceType":"Diseño y despliegue de página web corporativa",
-  "offers":{
-    "@type":"Offer",
-    "priceCurrency":"DOP",
-    "price":"800",
-    "description":"Suscripción mensual. Pago inicial RD$1,000. 1 semana de prueba gratis. Propiedad tras 4 meses. Pago cada 25 de mes."
-  }
+  "offers":{"@type":"Offer","priceCurrency":"DOP","price":"800","description":"Suscripción mensual. Pago inicial RD$1,000. 1 semana de prueba gratis. Propiedad tras 4 meses. Pago cada 25 de mes."}
 }
 </script>
 </head>
@@ -298,62 +219,56 @@
         <img src="https://i.postimg.cc/TP2DKhqY/Servicios-Jey.png" alt="Servicios Jey" />
       </div>
     </a>
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">Menú ▾</button>
-    <nav>
-      <ul>
-        <li><a href="#beneficios">Beneficios</a></li>
-        <li><a href="#plan">Plan</a></li>
-        <li><a href="#pasos">Cómo funciona</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-    <a class="cta pulse" id="ctaHeader" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener">Pedir prueba gratis</a>
+    <!-- SOLO icono de menú a la derecha -->
+    <button class="menu-toggle" id="openDrawer" aria-label="Abrir menú">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/></svg>
+    </button>
   </div>
 </header>
 
-<main id="home">
-  <!-- orbes flotantes -->
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
-
-  <!-- HERO -->
- <section class="hero" id="home">
-  <div class="hero-inner">
-    <div class="hero-blur">
-      <h1 class="shine">Tu Web Corporativa lista en 2–3 días</h1>
-      <p class="sub">Diseño personalizado + dominio + hosting + WhatsApp integrado.
-        <b>RD$800/mes</b> + <b>RD$1,000 inicial</b>. <u>1 semana de prueba gratis</u>.
-      </p>
-
-      <div class="badges">
-        <span class="badge">Propiedad tras 4 meses</span>
-        <span class="badge">Pago cada 25</span>
-        <span class="badge">SSL y rendimiento</span>
-        <span class="badge">Soporte y cambios mensuales</span>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn primary" data-cta>Quiero mi semana gratis</a>
-        <a class="btn whatsapp" data-cta>Hablar por WhatsApp</a>
-        <a class="btn" href="#plan">Ver plan y precio</a>
-      </div>
-    </div>
+<!-- Drawer derecho -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <header class="nav" style="padding:12px 16px">
+    <button class="close" id="closeDrawer" aria-label="Cerrar menú">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff"><path d="M18.3 5.71 12 12.01l-6.29-6.3-1.41 1.42L10.59 13.4l-6.3 6.3 1.42 1.41 6.3-6.29 6.29 6.29 1.41-1.41-6.29-6.3 6.3-6.29-1.41-1.41Z"/></svg>
+      Cerrar
+    </button>
+  </header>
+  <div class="content">
+    <nav>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#plan">Plan</a>
+      <a href="#pasos">Cómo funciona</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener">Prueba gratis 7 días</a>
   </div>
-</section>
+</aside>
 
+<main id="home">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="cloud">
+        <h1 class="shine">Tu Web Corporativa lista en 2–3 días</h1>
+        <p class="sub">Diseño personalizado + dominio + hosting + WhatsApp integrado.
+          <b>RD$800/mes</b> + <b>RD$1,000 inicial</b>. <u>1 semana de prueba gratis</u>.
+        </p>
 
-      
+        <div class="badges">
+          <span class="badge">Propiedad tras 4 meses</span>
+          <span class="badge">Pago cada 25</span>
+          <span class="badge">SSL y rendimiento</span>
+          <span class="badge">Soporte y cambios mensuales</span>
+        </div>
 
-      <div class="hero-card reveal" aria-label="Resumen del plan">
-        <h3>Plan Web Corporativa</h3>
-        <div class="line"><span>RD$800/mes</span><span>Suscripción con soporte</span></div>
-        <div class="line"><span>RD$1,000</span><span>Pago inicial (activación)</span></div>
-        <div class="line"><span>7 días</span><span>Prueba gratis sin compromiso</span></div>
-        <div class="line"><span>25 de cada mes</span><span>Fecha de cobro</span></div>
-        <div class="line"><span>4 meses</span><span>Propiedad del sitio</span></div>
-        <div class="hero-actions"><a class="btn primary" data-cta>Empezar ahora</a></div>
+        <div class="hero-actions">
+          <a class="btn primary" data-cta>Quiero mi semana gratis</a>
+          <a class="btn whatsapp" data-cta>Hablar por WhatsApp</a>
+          <a class="btn" href="#plan">Ver plan y precio</a>
+        </div>
       </div>
     </div>
   </section>
@@ -534,20 +449,32 @@
   <div class="container" style="margin-top:16px">© <span id="year"></span> Servicios Jey — Todos los derechos reservados.</div>
 </footer>
 
-<!-- CTA flotantes -->
-<a class="wa-float" href="https://wa.me/18094862675?text=Hola%20Servicios%20Jey%2C%20quiero%20mi%20SEMANA%20DE%20PRUEBA%20GRATIS%20de%20la%20Web%20Corporativa." target="_blank" rel="noopener" aria-label="Abrir chat de WhatsApp">Chatea ahora</a>
-<div class="sticky-cta" id="stickyCta" hidden>
-  <a class="btn primary" data-cta>Prueba gratis 7 días</a>
-  <a class="btn whatsapp" data-cta>Contratar</a>
-</div>
-
 <script>
   // Año dinámico
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Menú móvil
-  const menuBtn = document.getElementById('menuBtn');
-  menuBtn?.addEventListener('click', () => document.body.classList.toggle('menu-open'));
+  // Drawer
+  const body = document.body;
+  const openBtn = document.getElementById('openDrawer');
+  const closeBtn = document.getElementById('closeDrawer');
+  const drawer = document.getElementById('drawer');
+  const scrim  = document.getElementById('scrim');
+
+  function openDrawer(){
+    body.classList.add('drawer-open');
+    drawer.setAttribute('aria-hidden','false');
+  }
+  function closeDrawer(){
+    body.classList.remove('drawer-open');
+    drawer.setAttribute('aria-hidden','true');
+  }
+  openBtn?.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  scrim?.addEventListener('click', closeDrawer);
+  // Cerrar al navegar
+  drawer.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', closeDrawer);
+  });
 
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a=>{
@@ -557,28 +484,17 @@
       if(el){
         e.preventDefault();
         window.scrollTo({top: el.offsetTop-70, behavior:'smooth'});
-        document.body.classList.remove('menu-open');
       }
     });
   });
 
-  // Intersection Observer para reveal
+  // Reveal
   const io = new IntersectionObserver((entries)=>{
     for(const en of entries){
       if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
     }
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
-
-  // Parallax suave en elementos con data-parallax
-  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
-  window.addEventListener('scroll', ()=>{
-    const y = window.scrollY;
-    parallaxEls.forEach(el=>{
-      const f = parseFloat(el.dataset.parallax||'0.05');
-      el.style.transform = `translateY(${y * f}px)`;
-    });
-  }, {passive:true});
 
   // CTA universal a WhatsApp
   const waNumber = '18094862675';
@@ -589,19 +505,6 @@
   const defaultMsg = 'Hola Servicios Jey, quiero mi SEMANA DE PRUEBA GRATIS de la Web Corporativa. Mi nombre es ____ y mi negocio es ____.';
   document.querySelectorAll('[data-cta]').forEach(btn=>{
     btn.addEventListener('click', ()=> openWA(defaultMsg));
-  });
-
-  // Sticky CTA al hacer scroll
-  const sticky = document.getElementById('stickyCta');
-  let shown = false;
-  window.addEventListener('scroll', ()=>{
-    const y = window.scrollY;
-    if(y > 480 && !shown){
-      sticky.hidden = false;
-      sticky.animate([{transform:'translateY(100%)'},{transform:'translateY(0)'}],{duration:300, easing:'ease-out'});
-      shown = true;
-    }
-    if(y < 200 && shown){ sticky.hidden = true; shown = false; }
   });
 
   // Formulario -> WhatsApp
@@ -617,10 +520,9 @@
     openWA(msg);
   });
 
-  // ===== Utilidades seguras para localStorage =====
-  const LS = { get(k, f=null){try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}}, set(k,v){try{localStorage.setItem(k, JSON.stringify(v))}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}} };
   // Persistencia básica del formulario
-  const FORM_KEY = 'sj_webcorp_form_v2';
+  const LS = { get(k, f=null){try{const r=localStorage.getItem(k);return r?JSON.parse(r):f}catch(e){return f}}, set(k,v){try{localStorage.setItem(k, JSON.stringify(v))}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}} };
+  const FORM_KEY = 'sj_webcorp_form_v3';
   function loadForm(){
     if(!form) return;
     const d=LS.get(FORM_KEY, {});
